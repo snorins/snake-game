@@ -14,6 +14,9 @@ let foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
 
 let snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
 let snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+
+// Array of arrays, each consists of the first element - X position and the second element is the Y position.
+// First array is always the snakes head.
 let snakeBody = [];
 
 let velocityX = 0;
@@ -42,7 +45,7 @@ gameOverDialog.addEventListener('close', () => {
     resetGame();
 })
 
-const isTouchingFood = () => {
+const isSnakeEatingFood = () => {
     return snakeHeadX === foodPositionX && snakeHeadY === foodPositionY;
 };
 
@@ -84,9 +87,9 @@ const updateScores = () => {
 const updateBoard = () => {
     let boardInnerHTML = `<span class="food" style="grid-area: ${ foodPositionY } / ${ foodPositionX }"></span>`;
 
-    if (isTouchingFood()) {
-        changeFoodPosition();
+    if (isSnakeEatingFood()) {
         eatFood();
+        changeFoodPosition();
         updateScores();
     }
 
