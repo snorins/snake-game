@@ -25,7 +25,7 @@
 body {
     display: grid;
     place-items: center;
-    min-height: 100vh;
+    height: 100vh;
     background: var(--color-indigo-darker);
 }
 
