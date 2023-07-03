@@ -25,6 +25,11 @@ body {
     background: var(--color-indigo-darker);
 }
 
+.content-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .board {
     display: grid;
     width: 40rem;
@@ -66,7 +71,7 @@ body {
 .material-symbols-outlined {
     cursor: pointer;
     border-radius: 5rem;
-    font-size: 3.5rem;
+    font-size: 3.75rem;
     background: var(--color-indigo-dark);
     color: white;
 }
@@ -127,8 +132,11 @@ body {
 
 @media only screen and (max-width: 42rem) {
     body {
-        margin: 0 1rem;
         place-items: stretch;
+    }
+
+    .content-container {
+        flex-direction: column-reverse;
     }
 
     .board {
@@ -136,6 +144,7 @@ body {
     }
 
     .scores {
-        margin-top: 1rem;
+        font-size: 1.25rem;
+        margin: 1rem;
     }
 }
