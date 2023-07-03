@@ -45,7 +45,7 @@ gameOverDialog.addEventListener('close', () => {
     resetGame();
 })
 
-const isSnakeEatingFood = () => {
+const isSnakeReachingFood = () => {
     return snakeHeadX === foodPositionX && snakeHeadY === foodPositionY;
 };
 
@@ -87,7 +87,7 @@ const updateScores = () => {
 const updateBoard = () => {
     let boardInnerHTML = `<span class="food" style="grid-area: ${ foodPositionY } / ${ foodPositionX }"></span>`;
 
-    if (isSnakeEatingFood()) {
+    if (isSnakeReachingFood()) {
         eatFood();
         changeFoodPosition();
         updateScores();
