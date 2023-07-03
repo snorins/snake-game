@@ -28,11 +28,11 @@ let score = 0;
 
 let boardUpdateInterval;
 
-const violatesBoardBoundaries = () => {
+const movedOutOfBoardBoundaries = () => {
     return snakeHeadX <= 0 || snakeHeadX > boardHorizontalSquares || snakeHeadY <= 0 || snakeHeadY > boardVerticalSquares;
 };
 
-const handleGameOver = () => {
+const setGameOverState = () => {
     clearInterval(boardUpdateInterval);
     gameOverDialog.showModal();
 };
@@ -94,29 +94,34 @@ const updateBoard = () => {
     }
 
     // Before moving snakes tail forward (snake moving from left to right)
-    // [26, 27], [25, 27], [24, 27]
+    // [26, 27], [25, 27], [24, 27], [23, 27]
     for (let index = snakeBody.length - 1; index > 0; index--) {
         snakeBody[index] = snakeBody[index - 1];
     }
     // After moving snakes tail forward (snake moving from left to right)
-    // [26, 27], [26, 27], [25, 27]
+    // [26, 27], [26, 27], [25, 27], [24, 27]
 
     snakeHeadX += velocityX;
     snakeHeadY += velocityY;
     snakeBody[0] = [snakeHeadX, snakeHeadY];
     // After setting new head coordinates (snake moving from left to right)
-    // [27, 27], [26, 27], [25, 27]
+    // [27, 27], [26, 27], [25, 27], [24, 27]
 
-    snakeBody.forEach((bodyPart, index) => {
-        boardInnerHTML += `<span class="snake" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
+    if (movedOutOfBoardBoundaries()) {
+        gameOver = true;
+    }
 
-        if (index !== 0 && snakeBody[0][0] === bodyPart[0] && snakeBody[0][1] === bodyPart[1]) {
+    snakeBody.forEach(([partX, partY], index) => {
+        boardInnerHTML += `<span class="snake" style="grid-area: ${ partY } / ${ partX }"></span>`;
+
+        const [headX, headY] = snakeBody[0];
+        if (index !== 0 && headX === partX && headY === partY) {
             gameOver = true;
         }
     });
 
-    if (violatesBoardBoundaries() || gameOver) {
-        return handleGameOver();
+    if (gameOver) {
+        return setGameOverState();
     }
 
     board.innerHTML = boardInnerHTML;
@@ -227,8 +232,7 @@ const resetGame = () => {
 addEventListener('keydown', changeSnakeHeadDirection);
 screenControls.forEach((control) => {
     control.addEventListener('click', () => {
-        const arrowKey = control.getAttribute('data-control');
-        changeSnakeHeadDirection({ key: arrowKey });
+        changeSnakeHeadDirection({ key: control.getAttribute('data-direction') });
     });
 });
 
