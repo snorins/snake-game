@@ -93,20 +93,18 @@ const updateBoard = () => {
         updateScores();
     }
 
-
-    // Before (snake moving from left to right)
+    // Before moving snakes tail forward (snake moving from left to right)
     // [26, 27], [25, 27], [24, 27]
     for (let index = snakeBody.length - 1; index > 0; index--) {
-        snakeBody[index] = snakeBody[index - 1]; // Move the snakes tail forward.
+        snakeBody[index] = snakeBody[index - 1];
     }
-    // After (snake moving from left to right)
+    // After moving snakes tail forward (snake moving from left to right)
     // [26, 27], [26, 27], [25, 27]
 
     snakeHeadX += velocityX;
     snakeHeadY += velocityY;
-
     snakeBody[0] = [snakeHeadX, snakeHeadY];
-    // After (snake moving from left to right)
+    // After setting new head coordinates (snake moving from left to right)
     // [27, 27], [26, 27], [25, 27]
 
     snakeBody.forEach((bodyPart, index) => {
