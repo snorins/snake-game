@@ -39,11 +39,11 @@ const setGameOverState = () => {
 
 restartGameButton.addEventListener('click', () => {
     gameOverDialog.close();
-})
+});
 
 gameOverDialog.addEventListener('close', () => {
     resetGame();
-})
+});
 
 const isSnakeReachingFood = () => {
     return snakeHeadX === foodPositionX && snakeHeadY === foodPositionY;
@@ -52,6 +52,11 @@ const isSnakeReachingFood = () => {
 const changeFoodPosition = () => {
     foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
     foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+
+    while (snakeBody.some(([partX, partY]) => partX === foodPositionX && partY === foodPositionY)) {
+        foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
+        foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+    }
 };
 
 const changeSnakesHeadPosition = () => {
@@ -184,7 +189,7 @@ const changeSnakeHeadDirection = (event) => {
  */
 const canSnakeChangeVerticalDirection = () => {
     return snakeBody[0]?.[0] !== snakeBody[1]?.[0];
-}
+};
 
 /**
  * Checks the snake head's Y position and the snake head's closest body part's Y position to determine if the snake
@@ -210,7 +215,7 @@ const canSnakeChangeVerticalDirection = () => {
  */
 const canSnakeChangeHorizontalDirection = () => {
     return snakeBody[0]?.[1] !== snakeBody[1]?.[1];
-}
+};
 
 const resetGame = () => {
     score = 0;
@@ -227,7 +232,7 @@ const resetGame = () => {
     initializeScores();
 
     boardUpdateInterval = setInterval(updateBoard, 100);
-}
+};
 
 addEventListener('keydown', changeSnakeHeadDirection);
 screenControls.forEach((control) => {
