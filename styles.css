@@ -58,15 +58,6 @@ body {
     background: var(--color-snake);
 }
 
-.snake.head:after {
-    content: '';
-    display: block;
-    translate: 125% 125%;
-    width: 4px;
-    height: 4px;
-    background: var(--color-indigo-darker)
-}
-
 .screen-controls {
     display: none;
     justify-content: center;

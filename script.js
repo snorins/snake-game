@@ -100,8 +100,7 @@ const updateBoard = () => {
     snakeBody[0] = [snakeHeadX, snakeHeadY];
 
     snakeBody.forEach((bodyPart, index) => {
-        const classes = index === 0 ? ['snake', 'head'] : ['snake'];
-        boardInnerHTML += `<span class="${ classes.join(' ') }" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
+        boardInnerHTML += `<span class="snake" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
 
         if (index !== 0 && snakeBody[0][0] === bodyPart[0] && snakeBody[0][1] === bodyPart[1]) {
             gameOver = true;
