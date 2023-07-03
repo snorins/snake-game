@@ -14,7 +14,7 @@ let foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
 
 let snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
 let snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
-const snakeBody = [];
+let snakeBody = [];
 
 let velocityX = 0;
 let velocityY = 0;
@@ -35,11 +35,11 @@ const handleGameOver = () => {
 };
 
 restartGameButton.addEventListener('click', () => {
-    location.reload();
+    gameOverDialog.close();
 })
 
 gameOverDialog.addEventListener('close', () => {
-    location.reload();
+    resetGame();
 })
 
 const isTouchingFood = () => {
@@ -49,6 +49,11 @@ const isTouchingFood = () => {
 const changeFoodPosition = () => {
     foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
     foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+};
+
+const changeSnakesHeadPosition = () => {
+    snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
+    snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
 };
 
 const eatFood = () => {
@@ -95,7 +100,8 @@ const updateBoard = () => {
     snakeBody[0] = [snakeHeadX, snakeHeadY];
 
     snakeBody.forEach((bodyPart, index) => {
-        boardInnerHTML += `<span class="snake" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
+        const classes = index === 0 ? ['snake', 'head'] : ['snake'];
+        boardInnerHTML += `<span class="${ classes.join(' ') }" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
 
         if (index !== 0 && snakeBody[0][0] === bodyPart[0] && snakeBody[0][1] === bodyPart[1]) {
             gameOver = true;
@@ -192,6 +198,23 @@ const canSnakeChangeVerticalDirection = () => {
  */
 const canSnakeChangeHorizontalDirection = () => {
     return snakeBody[0]?.[1] !== snakeBody[1]?.[1];
+}
+
+const resetGame = () => {
+    score = 0;
+    snakeBody = [];
+    gameOver = false;
+
+    velocityX = 0;
+    velocityY = 0;
+
+    changeFoodPosition();
+
+    changeSnakesHeadPosition()
+
+    initializeScores();
+
+    boardUpdateInterval = setInterval(updateBoard, 100);
 }
 
 addEventListener('keydown', changeSnakeHeadDirection);

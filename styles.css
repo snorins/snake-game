@@ -8,6 +8,10 @@
     --color-snake: greenyellow;
 }
 
+::backdrop {
+    --color-modal-backdrop-primary: rgba(0, 0, 0, 0.6);
+}
+
 *,
 *:after,
 *:before {
@@ -54,6 +58,15 @@ body {
     background: var(--color-snake);
 }
 
+.snake.head:after {
+    content: '';
+    display: block;
+    translate: 125% 125%;
+    width: 4px;
+    height: 4px;
+    background: var(--color-indigo-darker)
+}
+
 .screen-controls {
     display: none;
     justify-content: center;
@@ -73,7 +86,7 @@ body {
     border-radius: 5rem;
     font-size: 3.75rem;
     background: var(--color-indigo-dark);
-    color: white;
+    color: var(--color-indigo-very-light);
 }
 
 .material-symbols-outlined:active {
@@ -103,7 +116,7 @@ body {
 }
 
 .game-over-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.6);
+    background: var(--color-modal-backdrop-primary);
 }
 
 .restart-game-button {
