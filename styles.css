@@ -43,7 +43,6 @@ body {
 
 .food {
     background: var(--color-snake-food);
-    box-shadow: 0 0 16px 4px var(--color-snake-food);
 }
 
 .snake {
