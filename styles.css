@@ -1,0 +1,142 @@
+:root {
+    --color-indigo-very-light: #e9c3ff;
+    --color-indigo-base: indigo;
+    --color-indigo-dark: #430273;
+    --color-indigo-darker: #36005d;
+
+    --color-snake-food: gold;
+    --color-snake: greenyellow;
+}
+
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: var(--color-indigo-darker);
+}
+
+.board {
+    display: grid;
+    width: 40rem;
+    aspect-ratio: 1;
+    grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+    background: var(--color-indigo-base);
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: var(--color-indigo-very-light);
+    margin-bottom: 1rem;
+}
+
+.food {
+    background: var(--color-snake-food);
+    box-shadow: 0 0 16px 4px var(--color-snake-food);
+}
+
+.snake {
+    background: var(--color-snake);
+}
+
+.screen-controls {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.screen-controls .up-down {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.material-symbols-outlined {
+    cursor: pointer;
+    border-radius: 5rem;
+    font-size: 3.5rem;
+    background: var(--color-indigo-dark);
+    color: white;
+}
+
+.material-symbols-outlined:active {
+    transform: translate(2%, 2%);
+}
+
+.game-over-dialog {
+    width: 30rem;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 4rem 8rem;
+    background: var(--color-indigo-base);
+    border: 2px solid var(--color-indigo-base);
+}
+
+.game-over-dialog section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.game-over-dialog .title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--color-indigo-very-light);
+}
+
+.game-over-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.restart-game-button {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: var(--color-indigo-very-light);
+    outline: 2px solid var(--color-indigo-very-light);
+    border: none;
+    background: var(--color-indigo-base);
+}
+
+.restart-game-button:hover {
+    background: var(--color-indigo-darker);
+}
+
+@media only screen and (max-width: 75rem) {
+    .screen-controls {
+        display: flex;
+    }
+
+    .game-over-dialog {
+        padding: 2rem 4rem;
+    }
+}
+
+@media only screen and (max-width: 42rem) {
+    body {
+        margin: 0 1rem;
+        place-items: stretch;
+    }
+
+    .board {
+        width: 100%;
+    }
+
+    .scores {
+        margin-top: 1rem;
+    }
+}
