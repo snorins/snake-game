@@ -9,17 +9,20 @@ const boardVerticalSquares = 30;
 
 const highScoreStorageKey = 'high-score';
 
-let foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
-let foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+let foodPositionX = getRandomBoardXCoordinate();
+let foodPositionY = getRandomBoardYCoordinate();
 
-let snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
-let snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+let snakeHeadX = getRandomBoardXCoordinate();
+let snakeHeadY = getRandomBoardYCoordinate();
 
 // Array of arrays, each consists of the first element - X position and the second element that is the Y position.
 // First array represents the snakes head position coordinates.
 let snakeBody = [];
 
+// (0) = not moving horizontally, (1) = going from left to right, (-1) = going from right to left
 let velocityX = 0;
+
+// (0) = not moving vertically, (1) = going down, (-1) = going up
 let velocityY = 0;
 
 let gameOver = false;
@@ -27,6 +30,14 @@ let gameOver = false;
 let score = 0;
 
 let boardUpdateInterval;
+
+function getRandomBoardXCoordinate() {
+    return Math.floor(Math.random() * boardHorizontalSquares) + 1
+}
+
+function getRandomBoardYCoordinate() {
+    return Math.floor(Math.random() * boardVerticalSquares) + 1
+}
 
 const movedOutOfBoardBoundaries = () => {
     return snakeHeadX <= 0 || snakeHeadX > boardHorizontalSquares || snakeHeadY <= 0 || snakeHeadY > boardVerticalSquares;
@@ -50,18 +61,18 @@ const isSnakeReachingFood = () => {
 };
 
 const changeFoodPosition = () => {
-    foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
-    foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+    foodPositionX = getRandomBoardXCoordinate();
+    foodPositionY = getRandomBoardYCoordinate();
 
     while (snakeBody.some(([partX, partY]) => partX === foodPositionX && partY === foodPositionY)) {
-        foodPositionX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
-        foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+        foodPositionX = getRandomBoardXCoordinate();
+        foodPositionY = getRandomBoardYCoordinate();
     }
 };
 
 const changeSnakesHeadPosition = () => {
-    snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
-    snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
+    snakeHeadX = getRandomBoardXCoordinate();
+    snakeHeadY = getRandomBoardYCoordinate();
 };
 
 const eatFood = () => {
