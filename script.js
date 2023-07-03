@@ -15,8 +15,8 @@ let foodPositionY = Math.floor(Math.random() * boardVerticalSquares) + 1;
 let snakeHeadX = Math.floor(Math.random() * boardHorizontalSquares) + 1;
 let snakeHeadY = Math.floor(Math.random() * boardVerticalSquares) + 1;
 
-// Array of arrays, each consists of the first element - X position and the second element is the Y position.
-// First array is always the snakes head.
+// Array of arrays, each consists of the first element - X position and the second element that is the Y position.
+// First array represents the snakes head position coordinates.
 let snakeBody = [];
 
 let velocityX = 0;
@@ -93,14 +93,21 @@ const updateBoard = () => {
         updateScores();
     }
 
+
+    // Before (snake moving from left to right)
+    // [26, 27], [25, 27], [24, 27]
     for (let index = snakeBody.length - 1; index > 0; index--) {
         snakeBody[index] = snakeBody[index - 1]; // Move the snakes tail forward.
     }
+    // After (snake moving from left to right)
+    // [26, 27], [26, 27], [25, 27]
 
     snakeHeadX += velocityX;
     snakeHeadY += velocityY;
 
     snakeBody[0] = [snakeHeadX, snakeHeadY];
+    // After (snake moving from left to right)
+    // [27, 27], [26, 27], [25, 27]
 
     snakeBody.forEach((bodyPart, index) => {
         boardInnerHTML += `<span class="snake" style="grid-area: ${ bodyPart[1] } / ${ bodyPart[0] }"></span>`;
@@ -210,9 +217,9 @@ const resetGame = () => {
     velocityX = 0;
     velocityY = 0;
 
-    changeFoodPosition();
+    changeSnakesHeadPosition();
 
-    changeSnakesHeadPosition()
+    changeFoodPosition();
 
     initializeScores();
 
