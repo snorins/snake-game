@@ -199,7 +199,7 @@ const changeSnakeHeadDirection = (event) => {
  * @returns {boolean}
  */
 const canSnakeChangeVerticalDirection = () => {
-    return snakeBody[0]?.[0] !== snakeBody[1]?.[0];
+    return snakeBody[0][0] !== snakeBody[1]?.[0];
 };
 
 /**
@@ -225,7 +225,7 @@ const canSnakeChangeVerticalDirection = () => {
  * @returns {boolean}
  */
 const canSnakeChangeHorizontalDirection = () => {
-    return snakeBody[0]?.[1] !== snakeBody[1]?.[1];
+    return snakeBody[0][1] !== snakeBody[1]?.[1];
 };
 
 const resetGame = () => {
