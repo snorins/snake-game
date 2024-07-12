@@ -1,5 +1,5 @@
 <h1 align="center">Snake Game</h1>
-<p align="center">Simple vanilla javascript snake game with support for mobile game controls. Give it a try <a href="https://janisjuniors.github.io/snake-game/">here</a>!</p>
+<p align="center">Simple vanilla javascript snake game with support for mobile game controls. Give it a try <a href="https://snorins.github.io/snake-game">here</a>!</p>
 
 <div align="center">
   <img src="https://github.com/janisjuniors/snake-game/assets/104723218/318d8f43-f780-45b2-8e90-ec232da11335" alt="Snake game playing demo" width="600">
